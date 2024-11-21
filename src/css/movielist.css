@@ -1,0 +1,38 @@
+#headerul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    list-style-type: none;
+    background-color: burlywood;
+}
+
+#headerul > div {
+    padding: 10px;
+    margin: 10px;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+    
+}
+
+#homeUl {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+    gap: 20px; /* 아이템 간격 */
+  }
+  
+  #homeUl li {
+    list-style: none;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    max-width: 150px; /* 아이템 최대 너비 */
+  }
+  
+  #homeUl img {
+    width: 150px; /* 이미지 너비 고정 */
+    height: 225px; /* 이미지 높이 고정 */
+    border-radius: 8px; /* 둥근 모서리 */
+    object-fit: cover; /* 비율을 유지하며 이미지 크기 조정 */
+  }

@@ -1,0 +1,22 @@
+#headerMain{
+    display: flex;
+    justify-content: center;
+    background-color: aqua;
+}
+
+#headerMain > div{
+    padding: 30px;
+    margin: 30px;
+    cursor: pointer;
+}
+
+.mainch{
+    background-color: red;
+    font-size: 40px;
+}
+
+.loglogo{
+    background-color: blue;
+    font-size: 30px;
+}
+  
