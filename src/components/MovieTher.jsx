@@ -40,7 +40,7 @@ export default function MovieTher({ path }) {
         }}
       >
         {data &&
-          data.results.slice(0, 11).map((el, index) => (
+          data.results.map((el, index) => (
             <div
               key={index}
               style={{

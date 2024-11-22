@@ -24,8 +24,6 @@ export default function MovieListpageList() {
     }
   })
 
-  console.log(checkid);
-  
   const now_playing = "movie/now_playing";
   const imageBaseURL = 'https://image.tmdb.org/t/p/w500';
 
