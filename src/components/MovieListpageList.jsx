@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import postApi from "../api/postsApi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 export default function MovieListpageList() {
   const [data, setData] = useState(null); // 영화 데이터를 저장
@@ -10,6 +12,8 @@ export default function MovieListpageList() {
   const [error, setError] = useState(null); // 에러 상태
   const { postId } = useParams(); // URL에서 postId 가져오기
   const posts = useSelector((state) => state.posts);
+  const navigate = useNavigate(); // React Router의 네비게이션 훅
+
   let checkid = 0;
 
   posts.filter((num)=> {
@@ -62,7 +66,11 @@ export default function MovieListpageList() {
           // 해당 영화가 현재 장르 ID를 포함하는지 확인
           if (el.genre_ids.includes(parseInt(checkid))) {
             return (
-              <li key={index} style={{ margin: '10px', listStyle: 'none' }}>
+              <li 
+              key={index} 
+              style={{ margin: '10px', listStyle: 'none', cursor: 'pointer'}}
+              onClick={() => {navigate(`/movieDetailPage/movieDetail`, {state: {el} })}} // 올바른 경로로 이동
+              >
                 <img src={`${imageBaseURL}${el.poster_path}`} alt={el.title} />
                 <p>{el.title}</p>
               </li>
