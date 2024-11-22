@@ -5,6 +5,7 @@ import MovieListPage from "../pages/MovieListPage";
 import MovieListpageList from "../components/MovieListpageList";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import MovieDetail from "../components/MovieDetail";
+import TherPage from "../pages/TherPage";
 
 const router = createBrowserRouter([
  {
@@ -18,8 +19,10 @@ const router = createBrowserRouter([
         children: [
           { path: "movieListPageList", element: <MovieListpageList/> },
           { path: "movieListPageList/:postId", element: <MovieListpageList /> },
+          
         ],
       },
+      { path: "TherPage", element: <TherPage></TherPage>}
     ],
   },
   {
@@ -31,7 +34,9 @@ const router = createBrowserRouter([
         element: <MovieDetail></MovieDetail>
       }
     ]
-  }
+  },
+  
+  
 ]);
 
 export default router;

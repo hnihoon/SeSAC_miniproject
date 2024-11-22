@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import postApi from "../api/postsApi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function MovieList({ path }) {
+export default function MovieTher({ path }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const imageBaseURL = 'https://image.tmdb.org/t/p/w500';
-  const sliderRef = useRef(null); // 슬라이더 컨테이너를 참조
-  const navigate = useNavigate(); // React Router의 네비게이션 훅
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -29,13 +28,15 @@ export default function MovieList({ path }) {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div style={{ position: 'relative', width: '100%', padding: '20px' }}>
       <div
         className="slider-container"
         style={{
           display: 'flex',
+          flexWrap: 'wrap', // 한 줄에 공간이 부족하면 다음 줄로 넘어감
           gap: '10px',
-          padding: '10px',
+          justifyContent: 'center', // 중앙 정렬
+          textAlign: 'center',
         }}
       >
         {data &&
@@ -43,19 +44,23 @@ export default function MovieList({ path }) {
             <div
               key={index}
               style={{
-                flex: '0 0 auto',
-                textAlign: 'center',
-                margin: '10px',
-                cursor: 'pointer', 
+                flex: '0 1 calc(33.33% - 20px)', // 3개씩 배치 (100% / 3)
+                boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center', // 중앙 정렬
+                justifyContent: 'center',
+                margin: '10px 0',
+                cursor: 'pointer',
               }}
-                onClick={() => {navigate(`/movieDetailPage/movieDetail`, {state: {el} })}} // 올바른 경로로 이동
+              onClick={() => navigate(`/movieDetailPage/movieDetail`, { state: { el } })}
             >
               <img
                 src={imageBaseURL + el.poster_path}
                 alt={el.title}
                 style={{
-                  width: '200px',
-                  height: '225px',
+                  width: '60%', // 부모 요소에 맞춤
+                  height: 'auto', // 비율 유지
                   borderRadius: '8px',
                   display: 'block',
                 }}
@@ -63,7 +68,6 @@ export default function MovieList({ path }) {
               <div style={{ marginTop: '10px', fontSize: '16px', color: '#333' }}>
                 {el.title}
               </div>
-              
             </div>
           ))}
       </div>
