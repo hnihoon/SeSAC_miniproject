@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import postApi from "../api/postsApi";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,7 +7,6 @@ export default function MovieList({ path }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const imageBaseURL = 'https://image.tmdb.org/t/p/w500';
-  const sliderRef = useRef(null); // 슬라이더 컨테이너를 참조
   const navigate = useNavigate(); // React Router의 네비게이션 훅
 
   useEffect(() => {
@@ -29,21 +28,21 @@ export default function MovieList({ path }) {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div style={{ position: 'relative', width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <div
         className="slider-container"
         style={{
           display: 'flex',
+          justifyContent: 'space-between',
           gap: '10px',
           padding: '10px',
         }}
       >
         {data &&
-          data.results.slice(0, 11).map((el, index) => (
+          data.results.slice(0, 8).map((el, index) => (
             <div
               key={index}
               style={{
-                flex: '0 0 auto',
                 textAlign: 'center',
                 margin: '10px',
                 cursor: 'pointer', 
