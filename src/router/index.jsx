@@ -4,11 +4,10 @@ import RootLayout from "../RootLayout";
 import MovieListPage from "../pages/MovieListPage";
 import MovieListpageList from "../components/MovieListpageList";
 import MovieDetailPage from "../pages/MovieDetailPage";
-import MovieDetail from "../components/MovieDetail";
 import TherPage from "../pages/TherPage";
 
 const router = createBrowserRouter([
- {
+  {
     path: "/",
     element: <RootLayout />,
     children: [
@@ -17,26 +16,23 @@ const router = createBrowserRouter([
         path: "movieListPage",
         element: <MovieListPage />,
         children: [
-          { path: "movieListPageList", element: <MovieListpageList/> },
+          { path: "movieListPageList", element: <MovieListpageList /> },
           { path: "movieListPageList/:postId", element: <MovieListpageList /> },
-          
         ],
       },
-      { path: "TherPage", element: <TherPage></TherPage>}
+      // {
+      //   path: "movieDetailPage",
+      //   element: <MovieDetailPage />,
+      //   children: [
+      //     { path: "movieDetail", element: <MovieDetail /> },
+      //   ],
+      // },
+      {
+        path: "MovieDetailPage", element: <MovieDetailPage />
+      },
+      { path: "TherPage", element: <TherPage /> },
     ],
   },
-  {
-    path: "movieDetailPage",
-    element: <MovieDetailPage></MovieDetailPage>,
-    children: [
-      {
-        path: "movieDetail",
-        element: <MovieDetail></MovieDetail>
-      }
-    ]
-  },
-  
-  
 ]);
 
 export default router;

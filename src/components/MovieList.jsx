@@ -47,7 +47,7 @@ export default function MovieList({ path }) {
                 margin: '10px',
                 cursor: 'pointer', 
               }}
-                onClick={() => {navigate(`/movieDetailPage/movieDetail`, {state: {el} })}} // 올바른 경로로 이동
+                onClick={() => {navigate(`/MovieDetailPage`, {state: {el} })}} // 올바른 경로로 이동
             >
               <img
                 src={imageBaseURL + el.poster_path}
