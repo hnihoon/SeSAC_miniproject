@@ -1,82 +1,109 @@
 import React, { useState, useEffect } from 'react';
 import postApi from "../api/postsApi";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-
-export default function MovieListpageList() {
-  const [data, setData] = useState(null); // 영화 데이터를 저장
-  const [genres, setGenres] = useState(null); // 장르 데이터를 저장
+export default function MovieListPageList() {
+  const [allMovies, setAllMovies] = useState([]); // 전체 영화 데이터를 저장
+  const [filteredMovies, setFilteredMovies] = useState([]); // 현재 장르에 해당하는 영화 데이터
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
-  const { postId } = useParams(); // URL에서 postId 가져오기
-  const posts = useSelector((state) => state.posts);
-  const navigate = useNavigate(); // React Router의 네비게이션 훅
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const moviesPerPage = 20; // 페이지당 영화 수
 
-  let checkid = 0;
-
-  posts.filter((num)=> {
-    // console.log(num.name);
-    
-    if(postId === num.name){
-      return checkid = num.id
-    }
-  })
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const genreId = location.state?.genreId;
   const now_playing = "movie/now_playing";
   const imageBaseURL = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
-  console.log(postId);
-    
-    async function fetchData() {
+    // 전체 영화 데이터 병렬로 가져오기
+    async function fetchAllMovies() {
       try {
-        setLoading(true); // 로딩 시작
+        setLoading(true);
 
-        // 장르 데이터 가져오기
-        const genresResult = await postApi.getGenres();
-        setGenres(genresResult.genres);
+        const firstPageResponse = await postApi.getPostById(`${now_playing}?page=1`);
+        const totalPages = Math.min(firstPageResponse.total_pages, 30);
 
-        // 영화 데이터 가져오기
-        const movieResult = await postApi.getPostById(now_playing);
-        setData(movieResult);
+        const pageRequests = [];
+        for (let i = 2; i <= totalPages; i++) {
+          pageRequests.push(postApi.getPostById(`${now_playing}?page=${i}`));
+        }
 
+        const pageResponses = await Promise.all(pageRequests);
+        const allResults = [
+          ...firstPageResponse.results,
+          ...pageResponses.flatMap((res) => res.results),
+        ];
+        const moviesWithPosters = allResults.filter((movie) => movie.poster_path);
+
+        setAllMovies(moviesWithPosters);
       } catch (err) {
-        console.error("Error fetching data:", err);
-        setError(err.message); // 에러 상태 설정
+        console.error("Error fetching movies:", err);
+        setError(err.message);
       } finally {
-        setLoading(false); // 로딩 종료
+        setLoading(false);
       }
     }
 
-    fetchData();
-  }, [postId]); // postId가 변경될 때마다 실행
+    fetchAllMovies();
+  }, []);
 
-  if (loading) return <div>Loading...</div>; // 로딩 중
-  if (error) return <div>Error: {error}</div>; // 에러 발생 시
-  if (!data || !data.results) return <div>No Data Available</div>; // 데이터가 없는 경우
+  useEffect(() => {
+    // 전달받은 장르 ID로 필터링
+    if (genreId) {
+      const genreMovies = allMovies.filter((movie) => movie.genre_ids.includes(genreId));
+      setFilteredMovies(genreMovies);
+      setCurrentPage(1);
+    }
+  }, [genreId, allMovies]);
+
+  const handlePageChange = (direction) => {
+    setCurrentPage((prev) => Math.max(1, prev + direction));
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  const startIndex = (currentPage - 1) * moviesPerPage;
+  const paginatedMovies = filteredMovies.slice(startIndex, startIndex + moviesPerPage);
 
   return (
-    <>
-      <ul id="homeUl" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', padding: 0 }}>
-        {data.results.map((el, index) => {
-          // 해당 영화가 현재 장르 ID를 포함하는지 확인
-          if (el.genre_ids.includes(parseInt(checkid))) {
-            return (
-              <li 
-              key={index} 
-              style={{ margin: '10px', listStyle: 'none', cursor: 'pointer'}}
-              onClick={() => {navigate(`/movieDetailPage/movieDetail`, {state: {el} })}} // 올바른 경로로 이동
-              >
-                <img src={`${imageBaseURL}${el.poster_path}`} alt={el.title} />
-                <p>{el.title}</p>
-              </li>
-            );
-          }
-          return null; // 조건을 만족하지 않으면 렌더링하지 않음
-        })}
+    <div>
+      {/* 영화 목록 */}
+      <ul id="homeUl" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', padding: 0 }}>
+        {paginatedMovies.map((el, index) => (
+          <li
+            key={index}
+            style={{ margin: '10px', listStyle: 'none', cursor: 'pointer' }}
+            onClick={() => { navigate(`/MovieDetailPage`, { state: { el } }) }}
+          >
+            <img src={`${imageBaseURL}${el.poster_path}`} alt={el.title} />
+            <p>{el.title}</p>
+          </li>
+        ))}
       </ul>
-    </>
+
+      {/* 페이지네이션 */}
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <button
+          onClick={() => handlePageChange(-1)}
+          disabled={currentPage === 1}
+          style={{ margin: '5px', padding: '10px', cursor: 'pointer' }}
+        >
+          이전
+        </button>
+        <span>
+          Page {currentPage} of {Math.ceil(filteredMovies.length / moviesPerPage)}
+        </span>
+        <button
+          onClick={() => handlePageChange(1)}
+          disabled={currentPage >= Math.ceil(filteredMovies.length / moviesPerPage)}
+          style={{ margin: '5px', padding: '10px', cursor: 'pointer' }}
+        >
+          다음
+        </button>
+      </div>
+    </div>
   );
 }

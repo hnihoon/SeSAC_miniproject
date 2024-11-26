@@ -7,13 +7,13 @@ export default function MovieListHeader() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // React Router의 네비게이션 훅
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
         const result = await postApi.getGenres();
-        setData(result.genres); // 장르 데이터를 설정
+        setData(result.genres);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError(err.message);
@@ -32,7 +32,7 @@ export default function MovieListHeader() {
       {data.map((el, index) => (
         <div
           key={index}
-          onClick={() => navigate(`/movieListPage/movieListPageList/${el.name}`)} // 올바른 경로로 이동
+          onClick={() => navigate(`/movieListPage/movieListPageList/${el.name}`, { state: { genreId: el.id } })}
         >
           {el.name}
         </div>

@@ -53,7 +53,8 @@ export default function MovieTher({ path }) {
                 margin: '10px 0',
                 cursor: 'pointer',
               }}
-              onClick={() => navigate(`/movieDetailPage/movieDetail`, { state: { el } })}
+              onClick={() => {navigate(`/MovieDetailPage`, {state: {el} })}} // 올바른 경로로 이동
+
             >
               <img
                 src={imageBaseURL + el.poster_path}
