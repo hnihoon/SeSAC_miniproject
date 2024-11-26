@@ -9,7 +9,6 @@ export default function TherPage() {
 
   return (
     <div>
-      <h1>TherPage</h1>
       {endpoint ? (
         <MovieTher path={endpoint} />
       ) : (
