@@ -5,18 +5,30 @@
 }
 
 #headerMain > div{
-    padding: 30px;
-    margin: 30px;
+    padding: 20px;
+    margin: 20px;
     cursor: pointer;
+    text-align: center;
+    line-height : 90px;
 }
 
 .mainch{
-    background-color: red;
     font-size: 40px;
 }
 
 .loglogo{
-    background-color: blue;
     font-size: 30px;
 }
-  
+
+.logo{
+    display: flex;
+    justify-content: left;
+    width: 100px;
+    height: 100px;
+}
+
+.logo > img { 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
