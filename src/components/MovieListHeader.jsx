@@ -33,8 +33,7 @@ export default function MovieListHeader() {
         <div
           key={index}
           onClick={() => navigate(`/movieListPage/movieListPageList/${el.name}`, { state: { genreId: el.id } })}
-        >
-          {el.name}
+        >{el.name}
         </div>
       ))}
     </div>
