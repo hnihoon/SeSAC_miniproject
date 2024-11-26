@@ -14,11 +14,13 @@ export default function Header() {
   
   return (
 <div id="headerMain">
-  <div className='logo loglogo'
-  onClick={() => {
-    navigate("/")
-  }}>로고
-  </div>
+    <div className='logo'
+    onClick={() => {
+      navigate("/")
+    }}>
+    <img src="/images/logo.png" alt="로고" id="logoimg"></img>
+    </div>
+
 
   <div className='mainch'
   onClick={() => {
@@ -27,7 +29,7 @@ export default function Header() {
   </div>
   <div className='mainch'
   onClick={() => {
-    navigate(`/movieListPage/movieListPageList/${posts[0].name}`)
+    navigate(`/movieListPage/movieListPageList/${posts[0].name}`, { state: { genreId : posts[0].id } })
   }}>MovieList
   </div>
 <div className="loglogo">
