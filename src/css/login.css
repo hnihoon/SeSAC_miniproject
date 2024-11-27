@@ -90,3 +90,11 @@
 .sociallog span{
 	width: 48%;
 }
+
+#member_span > a{
+	text-decoration-line: none;
+}
+
+::selection {
+    color: inherit; /* 텍스트 색상 상속 */
+}
