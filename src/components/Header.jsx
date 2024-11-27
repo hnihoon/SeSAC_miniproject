@@ -37,7 +37,6 @@ export default function Header() {
           <div
             onClick={() => {
               dispatch(logout());
-              // 홈으로 보내
             }}
           >
             로그아웃
@@ -45,8 +44,7 @@ export default function Header() {
         ) : (
           <div
             onClick={() => {
-              dispatch(login());
-
+              navigate("/loginPage")
             }}
           >
             로그인
