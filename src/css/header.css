@@ -1,7 +1,8 @@
 #headerMain{
     display: flex;
     justify-content: center;
-    background-color: aqua;
+    background-color: rgb(163, 214, 235);
+
 }
 
 #headerMain > div{
