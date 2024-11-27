@@ -5,6 +5,7 @@ import MovieListPage from "../pages/MovieListPage";
 import MovieListpageList from "../components/MovieListpageList";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import TherPage from "../pages/TherPage";
+import Login from "../pages/login";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,12 @@ const router = createBrowserRouter([
       {
         path: "MovieDetailPage", element: <MovieDetailPage />
       },
-      { path: "TherPage", element: <TherPage /> },
+      { 
+        path: "TherPage", element: <TherPage /> 
+      },
+      {
+        path: "loginPage", element: <Login></Login>
+      }
     ],
   },
 ]);
