@@ -98,3 +98,15 @@
 ::selection {
     color: inherit; /* 텍스트 색상 상속 */
 }
+
+/* 기본적으로 선택을 제한 */
+::selection {
+    background: none;
+    color: inherit;
+}
+
+/* input 내부 텍스트는 선택 가능하도록 허용 */
+input::selection {
+    background: highlight; /* 선택 시 강조 표시 */
+    color: highlighttext;  /* 선택된 텍스트 색상 */
+}
