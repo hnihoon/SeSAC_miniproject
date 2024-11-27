@@ -6,6 +6,7 @@ import MovieListpageList from "../components/MovieListpageList";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import TherPage from "../pages/TherPage";
 import Login from "../pages/login";
+import Member from "../pages/Member";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: "loginPage", element: <Login></Login>
+      },
+      {
+        path: "member", element: <Member></Member>
       }
+      
     ],
   },
 ]);
