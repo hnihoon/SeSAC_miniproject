@@ -7,6 +7,7 @@
     cursor: pointer;
     border: 4px solid black;
     border-radius: 20px;
-    background-color: blanchedalmond;
-    font-size: 32px;
+    background-color: rgb(211, 204, 208);
+    font-size: 30px;
+    line-height : 50px;
 }
