@@ -1,35 +1,91 @@
-#headerMain{
+ #headerMain {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     background-color: rgb(163, 214, 235);
-
+    padding: 20px 50px;
 }
 
-#headerMain > div{
-    padding: 20px;
-    margin: 20px;
-    cursor: pointer;
-    text-align: center;
-    line-height : 100px;
-}
-
-.mainch{
-    font-size: 40px;
-}
-
-.loglogo{
-    font-size: 30px;
-}
-
-.logo{
+#headerMain > .logo {
     display: flex;
     justify-content: left;
     width: 100px;
     height: 100px;
+    cursor: pointer;
 }
 
-.logo > img { 
+.logo > img {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+#headerMain > .menu-items {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-items > div {
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.mainch {
+    font-size: 40px;
+}
+
+.loglogo {
+    font-size: 30px;
+}
+
+/* 햄버거 아이콘 */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.search{
+    width: 800px;
+    font-size: 40px;
+}
+.search > input {
+    width: 80%;
+}
+
+/* 반응형: 화면 가로 크기가 810px 이하일 때 */
+@media (max-width: 810px) {
+    #headerMain {
+        justify-content: space-between;
+    }
+
+    .menu-items {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgb(163, 214, 235);
+        padding: 10px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-items.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .mainch,
+    .loglogo {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 0;
+        text-align: left;
+    }
 }
