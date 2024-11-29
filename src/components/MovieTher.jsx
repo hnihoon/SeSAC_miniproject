@@ -44,7 +44,7 @@ export default function MovieTher({ path }) {
             <div
               key={index}
               style={{
-                flex: '0 1 calc(33.33% - 20px)', // 3개씩 배치 (100% / 3)
+                flex: '0 1 calc(25% - 20px)', // 4개씩 배치 (100% / 3)
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
