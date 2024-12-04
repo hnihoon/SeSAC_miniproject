@@ -36,3 +36,34 @@
     border-radius: 8px; /* 둥근 모서리 */
     object-fit: cover; /* 비율을 유지하며 이미지 크기 조정 */
   }
+
+  /* 슬라이더 컨테이너 */
+.slider-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    overflow-x: auto; /* 가로 스크롤은 허용 */
+    scroll-behavior: smooth; /* 부드러운 스크롤 */
+    -ms-overflow-style: none; /* IE 스크롤바 숨김 */
+    scrollbar-width: none; /* Firefox 스크롤바 숨김 */
+  }
+
+/* 슬라이더 항목 */
+.slider-container > div {
+  flex-shrink: 0;
+  width: 200px;
+  text-align: center;
+}
+
+.slider-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  user-select: none; /* 선택 방지 */
+  pointer-events: none; /* 마우스 이벤트 비활성화 */
+}
+
+  /* 크롬, 사파리, 엣지에서 스크롤바 숨기기 */
+.slider-container::-webkit-scrollbar {
+  display: none;
+}
