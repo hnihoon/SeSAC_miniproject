@@ -60,37 +60,3 @@
     font-size: 25px;
 }
 
-/* 반응형: 화면 가로 크기가 810px 이하일 때 */
-@media (max-width: 800px) {
-    #headerMain {
-        justify-content: space-between;
-    }
-
-    .menu-items {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: rgb(163, 214, 235);
-        padding: 10px 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .menu-items.show {
-        display: flex;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .mainch,
-    .loglogo {
-        font-size: 20px;
-        padding: 10px 20px;
-        margin: 0;
-        text-align: left;
-    }
-}
