@@ -38,6 +38,7 @@
 
 .loglogo {
     font-size: 30px;
+    white-space: nowrap;
 }
 
 /* 햄버거 아이콘 */
@@ -48,15 +49,19 @@
 }
 
 .search{
+    display: flex;
+    align-items: center;
     width: 800px;
     font-size: 40px;
 }
 .search > input {
     width: 80%;
+    height: 40px;
+    font-size: 25px;
 }
 
 /* 반응형: 화면 가로 크기가 810px 이하일 때 */
-@media (max-width: 810px) {
+@media (max-width: 800px) {
     #headerMain {
         justify-content: space-between;
     }
